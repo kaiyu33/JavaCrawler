@@ -19,12 +19,12 @@ import org.jsoup.select.Elements;
 public class Rset {
 
 	public static void main(String[] args) throws IOException {
-		for(int i=1;i<=24;i++){
-			System.out.println("D"+i+"<-sapply(strsplit(csvv[i],\";\"),\"[\","+i+")");
+		for(int i=1;i<=20;i++){
+			System.out.println("elems.get(j).select(\"array:eq(\"+"+i+"+\")\").text(),");
 		}
-		for(int i=1;i<=24;i++){
-			System.out.print("D"+i+",");
-		}
+//		for(int i=1;i<=24;i++){
+//			System.out.print("D"+i+",");
+//		}
 	}
 
 }
