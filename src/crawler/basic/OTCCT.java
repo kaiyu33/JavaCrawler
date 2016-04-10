@@ -15,7 +15,7 @@ import com.github.abola.crawler.CrawlerPack;
  * @author Abola Lee
  *
  */
-public class RealPrice {
+public class OTCCT {
 	public static void main(String[] args) {
 		String day = "105/04/07";
 		String uri = "http://www.tpex.org.tw/web/stock/margin_trading/margin_balance/margin_bal_result.php?l=zh-tw&d="
