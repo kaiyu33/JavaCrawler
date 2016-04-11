@@ -13,21 +13,14 @@ import org.jsoup.select.Elements;
 
 import com.github.abola.crawler.CrawlerPack;
 
-/**
- * 練習： 實價登錄資料取得
- * 
- * 重點 1. 練習找出實價登錄公開資料源 2. zip 格式資料如何取出指定檔案
- * 
- * @author Abola Lee
- *
- */
+
 public class getTWSECT {
 	public static void main(String[] args) {
 		// for (int j = 94; j <= 104; j++) {// 從94開始有資料
 		int j = 94;
 		try {
-			// TWSECT(1);
-			TWSECTtotal(10);
+			TWSECT(10);
+//			TWSECTtotal(10);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -165,7 +158,7 @@ public class getTWSECT {
 				// System.out.println(elems.get(0).select("td:eq("+2+")").text());
 				String dataoutput = "代號,名稱,買進,賣出,現金償還,前日餘額,今日餘額,限額,買進,賣出,現券償還,前日餘額,今日餘額,限額,資券互抵,註記\n";// 1before6ncol
 
-				File file = new File("F:/EXdata/CreditTransactions/TWSECT" + ADdaybefore(daynum) + ".csv");
+				File file = new File("D:/EXdata/" + ADdaybefore(daynum) + ".csv");
 				file.createNewFile();
 				FileWriter fw = new FileWriter(file, false);
 				// TRUE:繼續增加文字
@@ -174,34 +167,113 @@ public class getTWSECT {
 
 				try {
 					// 遂筆處理
-					for (int j = 0; j < 1000; j++) {
-						// System.out.println(data.get(i).toString());
-						String dataoutput1 = String.join(",", elems.get(j).select("td:eq(" + 0 + ")").text(),
-								elems.get(j).select("td:eq(" + 1 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 2 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 3 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 4 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 5 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 6 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 7 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 8 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 9 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 10 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 11 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 12 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 13 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 14 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 15 + ")").text().replace(",", "")//
+					//// method:4 效能最好
+					for (Element elems2 : elems) {
+						String dataoutput1 = String.join(",", 
+								elems2.select("td:eq(" + 0 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 1 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 2 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 3 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 4 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 5 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 6 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 7 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 8 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 9 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 10 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 11 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 12 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 13 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 14 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 15 + ")").text().replace(",", "")//
 						);
-
-						// String str2 = str1.replace('-',',');
-
+//						System.out.println(dataoutput1);
 						bw.write(dataoutput1);
 						bw.newLine();
-
-						// System.out.println(data);
 						// dataoutput += dataoutput1 + "\n";
 					}
+					// 遂筆處理
+					// for (int j = 0; j < 1000; j++) {
+					// // System.out.println(data.get(i).toString());
+					////// method:3 效能最好
+					// Element elems2 = elems.get(j);
+					//// System.out.println(elems2.select("td:eq(" + 1 +
+					// ")").text().replace(",", ""));
+					// String dataoutput1 =
+					// String.join(",",elems2.select("td:eq("+0+")").text().replace(",",""),
+//					elems2.select("td:eq("+1+")").text().replace(",",""),
+					// elems2.select("td:eq("+2+")").text().replace(",", ""),
+					// elems2.select("td:eq("+3+")").text().replace(",", ""),
+					// elems2.select("td:eq("+4+")").text().replace(",", ""),
+					// elems2.select("td:eq("+5+")").text().replace(",", ""),
+					// elems2.select("td:eq("+6+")").text().replace(",", ""),
+					// elems2.select("td:eq("+7+")").text().replace(",", ""),
+					// elems2.select("td:eq("+8+")").text().replace(",", ""),
+					// elems2.select("td:eq("+9+")").text().replace(",", ""),
+					// elems2.select("td:eq("+10+")").text().replace(",", ""),
+					// elems2.select("td:eq("+11+")").text().replace(",", ""),
+					// elems2.select("td:eq("+12+")").text().replace(",", ""),
+					// elems2.select("td:eq("+13+")").text().replace(",", ""),
+					// elems2.select("td:eq("+14+")").text().replace(",", ""),
+					// elems2.select("td:eq("+15+")").text().replace(",", "")//
+					// );
+					////// method:1
+					//// String dataoutput1 = String.join(",",
+					// elems.get(j).select("td:eq(" + 0 + ")").text(),
+					//// elems.get(j).select("td:eq(" + 1 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 2 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 3 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 4 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 5 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 6 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 7 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 8 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 9 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 10 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 11 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 12 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 13 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 14 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 15 +
+					// ")").text().replace(",", "")//
+					//// );
+					//// method:2 效能較差 程式碼較短
+					//// String dataoutput1 = "String dataoutput1 = ";
+					//// int colmax = 20;
+					//// for (int i = 0; i <= colmax; i++) {
+					//// dataoutput1 += "elems.get(j).select(\"td:eq(\"+" + i +
+					// "+\")\").text().replace(\",\", \"\")";
+					////
+					//// if (i < colmax) {
+					//// dataoutput1 += ",\n";
+					//// } else if (i == colmax) {
+					//// dataoutput1 += ";";
+					//// }
+					//// }
+					//// System.out.println(dataoutput1);
+					//
+					// // String str2 = str1.replace('-',',');
+					//
+					// bw.write(dataoutput1);
+					// bw.newLine();
+					//
+					// // System.out.println(data);
+					// // dataoutput += dataoutput1 + "\n";
+					// }
 					// System.out.println("data" + dataoutput);
 				} catch (IndexOutOfBoundsException e) {
 					// break;
@@ -220,7 +292,7 @@ public class getTWSECT {
 	}
 
 	public static void TWSECTtotal(int befredaynum) throws Exception {
-		File file = new File("F:/EXdata/CreditTransactions/TWSECTtotal.csv");
+		File file = new File("D:/EXdata/CreditTransactions/TWSECTtotal.csv");
 		file.createNewFile();
 		FileWriter fw = new FileWriter(file, false);
 		// TRUE:繼續增加文字
@@ -296,25 +368,73 @@ public class getTWSECT {
 							// System.out.println(elems.get(0).select("td:eq("+2+")").text());
 
 					// 遂筆處理
-					for (int j = 0; j < 3; j++) {
-						// System.out.println(data.get(i).toString());
+					//// method:4 效能最好
+					for (Element elems2 : elems) {
 						String dataoutput1 = String.join(",", ADdaybefore(daynum),
-								elems.get(j).select("td:eq(" + 0 + ")").text(),
-								elems.get(j).select("td:eq(" + 1 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 2 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 3 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 4 + ")").text().replace(",", ""),
-								elems.get(j).select("td:eq(" + 5 + ")").text().replace(",", "")//
+								elems2.select("td:eq(" + 0 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 1 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 2 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 3 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 4 + ")").text().replace(",", ""),
+								elems2.select("td:eq(" + 5 + ")").text().replace(",", "")//
 						);
-
-						// String str2 = str1.replace('-',',');
-
+//						System.out.println(dataoutput1);
 						bw.write(dataoutput1);
 						bw.newLine();
-
-						// System.out.println(data);
 						// dataoutput += dataoutput1 + "\n";
 					}
+
+					// 遂筆處理
+					// for (int j = 0; j < 3; j++) {
+					// // System.out.println(data.get(i).toString());
+					////// method:1
+					//// String dataoutput1 = String.join(",",
+					// ADdaybefore(daynum),
+					//// elems.get(j).select("td:eq(" + 0 + ")").text(),
+					//// elems.get(j).select("td:eq(" + 1 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 2 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 3 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 4 +
+					// ")").text().replace(",", ""),
+					//// elems.get(j).select("td:eq(" + 5 +
+					// ")").text().replace(",", "")//
+					//// );
+					////// method:3 效能最好
+					// Element elems2 = elems.get(j);
+					//// System.out.println(elems2.select("td:eq(" + 1 +
+					// ")").text().replace(",", ""));
+					// String dataoutput1 = String.join(",",ADdaybefore(daynum),
+					// elems2.select("td:eq(" + 0 + ")").text(),
+					// elems2.select("td:eq("+1+")").text().replace(",", ""),
+					// elems2.select("td:eq("+2+")").text().replace(",", ""),
+					// elems2.select("td:eq("+3+")").text().replace(",", ""),
+					// elems2.select("td:eq("+4+")").text().replace(",", ""),
+					// elems2.select("td:eq("+5+")").text().replace(",", "")//
+					// );
+					//// method:2 效能較差 程式碼較短
+					//// String dataoutput1 = "String dataoutput1 = ";
+					//// int colmax = 5;
+					//// for (int i = 0; i <= colmax; i++) {
+					//// dataoutput1 += "elems.get(j).select(\"td:eq(\"+" + i +
+					// "+\")\").text().replace(\",\", \"\")";
+					//// if (i < colmax) {
+					//// dataoutput1 += ",\n";
+					//// } else if (i == colmax) {
+					//// dataoutput1 += ";";
+					//// }
+					//// }
+					//// System.out.println(dataoutput1);
+					// // String str2 = str1.replace('-',',');
+					//
+					// bw.write(dataoutput1);
+					// bw.newLine();
+					//
+					// // System.out.println(data);
+					// // dataoutput += dataoutput1 + "\n";
+					// }
 					// System.out.println("data" + dataoutput);
 
 				} else {
