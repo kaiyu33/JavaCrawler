@@ -158,7 +158,7 @@ public class getTWSECT {
 				// System.out.println(elems.get(0).select("td:eq("+2+")").text());
 				String dataoutput = "代號,名稱,買進,賣出,現金償還,前日餘額,今日餘額,限額,買進,賣出,現券償還,前日餘額,今日餘額,限額,資券互抵,註記\n";// 1before6ncol
 
-				File file = new File("D:/EXdata/" + ADdaybefore(daynum) + ".csv");
+				File file = new File("D:/EXdata/CreditTransactions/TWSECT" + ADdaybefore(daynum) + ".csv");
 				file.createNewFile();
 				FileWriter fw = new FileWriter(file, false);
 				// TRUE:繼續增加文字
@@ -167,31 +167,57 @@ public class getTWSECT {
 
 				try {
 					// 遂筆處理
-					//// method:4 效能最好
+					//// method:5 4改進代碼取得問題 0050變成50
+
 					for (Element elems2 : elems) {
-						String dataoutput1 = String.join(",", 
-								elems2.select("td:eq(" + 0 + ")").text().replace(",", ""),
-								elems2.select("td:eq(" + 1 + ")").text().replace(",", ""),
-								elems2.select("td:eq(" + 2 + ")").text().replace(",", ""),
-								elems2.select("td:eq(" + 3 + ")").text().replace(",", ""),
-								elems2.select("td:eq(" + 4 + ")").text().replace(",", ""),
-								elems2.select("td:eq(" + 5 + ")").text().replace(",", ""),
-								elems2.select("td:eq(" + 6 + ")").text().replace(",", ""),
-								elems2.select("td:eq(" + 7 + ")").text().replace(",", ""),
-								elems2.select("td:eq(" + 8 + ")").text().replace(",", ""),
-								elems2.select("td:eq(" + 9 + ")").text().replace(",", ""),
-								elems2.select("td:eq(" + 10 + ")").text().replace(",", ""),
-								elems2.select("td:eq(" + 11 + ")").text().replace(",", ""),
-								elems2.select("td:eq(" + 12 + ")").text().replace(",", ""),
-								elems2.select("td:eq(" + 13 + ")").text().replace(",", ""),
-								elems2.select("td:eq(" + 14 + ")").text().replace(",", ""),
+						String dataoutput1 = "\'"+
+							elems2.select("td:eq(" + 0 + ")").text().replace(",", "")+","+
+								elems2.select("td:eq(" + 1 + ")").text().replace(",", "")+","+
+								elems2.select("td:eq(" + 2 + ")").text().replace(",", "")+","+
+								elems2.select("td:eq(" + 3 + ")").text().replace(",", "")+","+
+								elems2.select("td:eq(" + 4 + ")").text().replace(",", "")+","+
+								elems2.select("td:eq(" + 5 + ")").text().replace(",", "")+","+
+								elems2.select("td:eq(" + 6 + ")").text().replace(",", "")+","+
+								elems2.select("td:eq(" + 7 + ")").text().replace(",", "")+","+
+								elems2.select("td:eq(" + 8 + ")").text().replace(",", "")+","+
+								elems2.select("td:eq(" + 9 + ")").text().replace(",", "")+","+
+								elems2.select("td:eq(" + 10 + ")").text().replace(",", "")+","+
+								elems2.select("td:eq(" + 11 + ")").text().replace(",", "")+","+
+								elems2.select("td:eq(" + 12 + ")").text().replace(",", "")+","+
+								elems2.select("td:eq(" + 13 + ")").text().replace(",", "")+","+
+								elems2.select("td:eq(" + 14 + ")").text().replace(",", "")+","+
 								elems2.select("td:eq(" + 15 + ")").text().replace(",", "")//
-						);
+								;
 //						System.out.println(dataoutput1);
 						bw.write(dataoutput1);
 						bw.newLine();
 						// dataoutput += dataoutput1 + "\n";
 					}
+				//// method:4 效能最好
+//					for (Element elems2 : elems) {
+//						String dataoutput1 = String.join(",", "\"",
+//								elems2.select("td:eq(" + 0 + ")").text().replace(",", ""),"\"",
+//								elems2.select("td:eq(" + 1 + ")").text().replace(",", ""),
+//								elems2.select("td:eq(" + 2 + ")").text().replace(",", ""),
+//								elems2.select("td:eq(" + 3 + ")").text().replace(",", ""),
+//								elems2.select("td:eq(" + 4 + ")").text().replace(",", ""),
+//								elems2.select("td:eq(" + 5 + ")").text().replace(",", ""),
+//								elems2.select("td:eq(" + 6 + ")").text().replace(",", ""),
+//								elems2.select("td:eq(" + 7 + ")").text().replace(",", ""),
+//								elems2.select("td:eq(" + 8 + ")").text().replace(",", ""),
+//								elems2.select("td:eq(" + 9 + ")").text().replace(",", ""),
+//								elems2.select("td:eq(" + 10 + ")").text().replace(",", ""),
+//								elems2.select("td:eq(" + 11 + ")").text().replace(",", ""),
+//								elems2.select("td:eq(" + 12 + ")").text().replace(",", ""),
+//								elems2.select("td:eq(" + 13 + ")").text().replace(",", ""),
+//								elems2.select("td:eq(" + 14 + ")").text().replace(",", ""),
+//								elems2.select("td:eq(" + 15 + ")").text().replace(",", "")//
+//						);
+////						System.out.println(dataoutput1);
+//						bw.write(dataoutput1);
+//						bw.newLine();
+//						// dataoutput += dataoutput1 + "\n";
+//					}
 					// 遂筆處理
 					// for (int j = 0; j < 1000; j++) {
 					// // System.out.println(data.get(i).toString());
