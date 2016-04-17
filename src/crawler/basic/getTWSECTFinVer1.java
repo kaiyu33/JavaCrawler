@@ -14,7 +14,7 @@ import org.jsoup.select.Elements;
 import com.github.abola.crawler.CrawlerPack;
 
 
-public class getTWSECTFinVer1_0 {
+public class getTWSECTFinVer1 {
 	public static void main(String[] args) {
 		try {
 			TWSECT(500);
