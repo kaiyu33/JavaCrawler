@@ -101,7 +101,7 @@ public class getTWSECT {
 			// String day = "105/04/07";
 			String uri = "http://www.twse.com.tw/device/ch/trading/exchange/MI_MARGN/MI_MARGN.php?input_date="
 					+ TWdaybefore(daynum) + "&selectType=ALL&login_btn=%20%E6%9F%A5%E8%A9%A2%20";
-
+System.out.println(uri);
 			// 印出整份 XML 資料
 			// System.out.println(CrawlerPack.start()
 			//

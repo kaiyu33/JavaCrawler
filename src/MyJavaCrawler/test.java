@@ -31,8 +31,9 @@ public class test {
 
 		String dataoutput1 = "String dataoutput1 = ";
 		int colmax = 20;
-		for (int i = 1; i <= colmax; i++) {
-			dataoutput1 += "elems2.select(\"td:eq(\"+"+i+"+\")\").text().replace(\",\", \"\")";
+		for (int i = 0; i <= colmax; i++) {
+			//td.get(23 * i + 2).text(), 
+			dataoutput1 += "td.get(23 *i+" +i+").text().replace(\",\", \"\").replace(\" \", \"\")";
 			if (i < colmax) {
 				dataoutput1 += ",\n";
 			} else if (i == colmax) {
